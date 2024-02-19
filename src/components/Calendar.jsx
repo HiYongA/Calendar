@@ -18,6 +18,7 @@ const Calendar = ({ onSelect }) => {
   for (let week = startWeek; week <= endWeek; week++) {
     calendar.push(
       <div key={week} className="week">
+        {/* 각 주의 일자를 생성하고, 현재 달에 속하는지 여부 확인 */}
         {Array.from({ length: 7 }).map((_, i) => {
           let current = currentMonth
             .clone()
@@ -39,6 +40,7 @@ const Calendar = ({ onSelect }) => {
     );
   }
 
+  // 요일 표시
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"].map(
     (day, index) => (
       <div key={index} className="day-of-week">
