@@ -3,8 +3,28 @@ import React, { useState } from "react";
 import moment from "moment";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const Calendar = ({ onSelect }) => {
+// 요일 표시
+const DAYS_OF_WEEK = ["일", "월", "화", "수", "목", "금", "토"].map(
+  (day, index) => (
+    <div key={index} className="day-of-week">
+      {day}
+    </div>
+  )
+);
+
+const Calendar = ({ onSelect, endDate }) => {
   const [currentMonth, setCurrentMonth] = useState(moment());
+  const today = moment();
+
+  const endDateMoment = endDate ? moment(endDate) : null;
+
+  const FnhandleDayClick = (selectedDate) => {
+    // 현재 날짜 이후의 날짜를 비활성화
+    if (selectedDate.isAfter(today, "day")) return;
+    // 선택된 날짜가 종료일 이후면 비활성화
+    if (endDateMoment && selectedDate.isAfter(endDateMoment, "day")) return;
+    onSelect(selectedDate);
+  };
 
   // 현재 월의 시작 주와 끝 주 찾기
   const startWeek = currentMonth.clone().startOf("month").week();
@@ -26,11 +46,16 @@ const Calendar = ({ onSelect }) => {
             .startOf("week")
             .add(i, "day");
           let isCurrentMonth = currentMonth.isSame(current, "month");
+          let isDisabled =
+            current.isAfter(today, "day") ||
+            (endDateMoment && current.isAfter(endDateMoment, "day"));
           return (
             <div
               key={i}
-              className={`day ${isCurrentMonth ? "" : "not-current"}`}
-              onClick={() => onSelect(current)}
+              className={`day ${isCurrentMonth ? "" : "not-current"} ${
+                isDisabled ? "disabled not-current" : ""
+              }`}
+              onClick={() => FnhandleDayClick(current)}
             >
               {current.format("D")}
             </div>
@@ -40,17 +65,18 @@ const Calendar = ({ onSelect }) => {
     );
   }
 
-  // 요일 표시
-  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"].map(
-    (day, index) => (
-      <div key={index} className="day-of-week">
-        {day}
-      </div>
-    )
-  );
+  // 종료일이 현재 날짜보다 이전인지 확인
+  const isEndDateBeforeToday =
+    endDate && moment(endDate).isSameOrBefore(today, "day");
 
   return (
     <div className="calendar">
+      <div className="cancel">
+        <button onClick={() => onSelect(null)}>삭제</button>
+        <button disabled={isEndDateBeforeToday} onClick={() => onSelect(today)}>
+          오늘
+        </button>
+      </div>
       <div className="month">
         <button
           onClick={() =>
@@ -66,7 +92,7 @@ const Calendar = ({ onSelect }) => {
           <IoIosArrowForward />
         </button>
       </div>
-      <div className="week">{daysOfWeek}</div>
+      <div className="week">{DAYS_OF_WEEK}</div>
       {calendar}
     </div>
   );

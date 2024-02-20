@@ -24,8 +24,6 @@ body {
 }
 
 section {
-  display: flex;
-  gap: 12px;
   background-color: #2d3033;
   padding: 10px 15px;
   border-radius: 7px;
@@ -33,12 +31,19 @@ section {
 
   button {
     display: flex;
+    align-items: flex-end;
+    gap: 12px;
     background-color: transparent;
     color: rgba(255, 255, 255, 0.7);
     padding: 0;
     border: none;
-    font-size: 20px;
     cursor: pointer;
+
+    div {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+    }
   }
 }
 
@@ -67,6 +72,19 @@ span {
       padding: 7px;
       border: 1px solid #464a4f;
       border-radius: 7px;
+      cursor: pointer;
+    }
+  }
+
+  .cancel {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+
+    button {
+      background-color: transparent;
+      color: #ff5f56;
+      border: none;
       cursor: pointer;
     }
   }

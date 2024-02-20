@@ -24,8 +24,6 @@ body {
 }
 
 section {
-  display: flex;
-  gap: 12px;
   background-color: #2d3033;
   padding: 10px 15px;
   border-radius: 7px;
@@ -33,12 +31,18 @@ section {
 }
 section button {
   display: flex;
+  align-items: flex-end;
+  gap: 12px;
   background-color: transparent;
   color: rgba(255, 255, 255, 0.7);
   padding: 0;
   border: none;
-  font-size: 20px;
   cursor: pointer;
+}
+section button div {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
 }
 
 span {
@@ -66,6 +70,17 @@ span {
   padding: 7px;
   border: 1px solid #464a4f;
   border-radius: 7px;
+  cursor: pointer;
+}
+.calendar .cancel {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+.calendar .cancel button {
+  background-color: transparent;
+  color: #ff5f56;
+  border: none;
   cursor: pointer;
 }
 .calendar .week {
