@@ -9,8 +9,8 @@ const DatePicker = () => {
   const [endDate, setEndDate] = useState(null);
   const [showCalendar, setShowCalendar] = useState(null);
 
-  // 종료일자가 시작일자보다 이전일 때,
-  // 선택한 종료일이 시작일자로 바뀌고, 선택한 시작일이 종료일자로 바뀜
+  // 시작일자가 종료일자보다 이후인 경우,
+  // 시작일자를 종료일자로 변경, 종료일자를 시작일자로 변경
   // (네이버, 구글 기간 검색)
   const FnValidateDates = useCallback(() => {
     if (startDate && endDate) {
@@ -31,8 +31,7 @@ const DatePicker = () => {
     } else {
       setEndDate(date);
     }
-
-    // 날짜 선택한 후 달력 숨기기
+    // 날짜 선택 후 캘린더 닫기
     setShowCalendar(null);
   };
 

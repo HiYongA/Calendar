@@ -16,8 +16,10 @@ const Calendar = ({ onSelect, endDate }) => {
   const [currentMonth, setCurrentMonth] = useState(moment());
   const today = moment();
 
+  // 종료일을 moment 객체로 변환
   const endDateMoment = endDate ? moment(endDate) : null;
 
+  // 날짜 클릭 핸들러 함수
   const FnhandleDayClick = (selectedDate) => {
     // 현재 날짜 이후의 날짜를 비활성화
     if (selectedDate.isAfter(today, "day")) return;
@@ -65,18 +67,12 @@ const Calendar = ({ onSelect, endDate }) => {
     );
   }
 
-  // 종료일이 현재 날짜보다 이전인지 확인
+  // 종료일이 현재 날짜보다 이전인지 확인하여 버튼 비활성화
   const isEndDateBeforeToday =
     endDate && moment(endDate).isSameOrBefore(today, "day");
 
   return (
     <div className="calendar">
-      <div className="cancel">
-        <button onClick={() => onSelect(null)}>삭제</button>
-        <button disabled={isEndDateBeforeToday} onClick={() => onSelect(today)}>
-          오늘
-        </button>
-      </div>
       <div className="month">
         <button
           onClick={() =>
@@ -90,6 +86,12 @@ const Calendar = ({ onSelect, endDate }) => {
           onClick={() => setCurrentMonth(currentMonth.clone().add(1, "month"))}
         >
           <IoIosArrowForward />
+        </button>
+      </div>
+      <div className="button-group">
+        <button onClick={() => onSelect(null)}>삭제</button>
+        <button disabled={isEndDateBeforeToday} onClick={() => onSelect(today)}>
+          오늘
         </button>
       </div>
       <div className="week">{DAYS_OF_WEEK}</div>

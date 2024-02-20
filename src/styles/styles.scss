@@ -76,7 +76,7 @@ span {
     }
   }
 
-  .cancel {
+  .button-group {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 10px;
@@ -85,7 +85,13 @@ span {
       background-color: transparent;
       color: #ff5f56;
       border: none;
+      margin-right: 10px;
       cursor: pointer;
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
     }
   }
 
