@@ -70,9 +70,11 @@ const DatePicker = () => {
       </div>
 
       {showCalendar === "start" && (
+        <Calendar onSelect={FnDateSelect} startDate={startDate} />
+      )}
+      {showCalendar === "end" && (
         <Calendar onSelect={FnDateSelect} endDate={endDate} />
       )}
-      {showCalendar === "end" && <Calendar onSelect={FnDateSelect} />}
     </div>
   );
 };

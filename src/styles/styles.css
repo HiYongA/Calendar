@@ -111,6 +111,11 @@ span {
   border-radius: 7px;
   color: #2d3033;
 }
+.calendar .day.selected {
+  background-color: #ff5f56;
+  color: #ffffff;
+  border-radius: 7px;
+}
 .calendar .day-of-week {
   width: 30px;
   height: 30px;

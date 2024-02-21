@@ -1,5 +1,5 @@
 import "../styles/styles.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
@@ -12,7 +12,7 @@ const DAYS_OF_WEEK = ["일", "월", "화", "수", "목", "금", "토"].map(
   )
 );
 
-const Calendar = ({ onSelect, endDate }) => {
+const Calendar = ({ onSelect, startDate, endDate }) => {
   const [currentMonth, setCurrentMonth] = useState(moment());
   const today = moment();
 
@@ -51,12 +51,14 @@ const Calendar = ({ onSelect, endDate }) => {
           let isDisabled =
             current.isAfter(today, "day") ||
             (endDateMoment && current.isAfter(endDateMoment, "day"));
+          let isStartDate = startDate && current.isSame(startDate, "day");
+          let isEndDate = endDate && current.isSame(endDate, "day");
           return (
             <div
               key={i}
               className={`day ${isCurrentMonth ? "" : "not-current"} ${
                 isDisabled ? "disabled not-current" : ""
-              }`}
+              } ${isStartDate || isEndDate ? "selected" : ""}`}
               onClick={() => FnhandleDayClick(current)}
             >
               {current.format("D")}

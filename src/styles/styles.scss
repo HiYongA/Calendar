@@ -121,6 +121,12 @@ span {
       border-radius: 7px;
       color: #2d3033;
     }
+
+    &.selected {
+      background-color: #ff5f56;
+      color: #ffffff;
+      border-radius: 7px;
+    }
   }
 
   .day-of-week {
